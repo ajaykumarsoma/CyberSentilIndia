@@ -33,42 +33,42 @@
 \midrule
 BERT$^\dagger$~\cite{bert2019}
     & Text
-    & 0.771{\scriptsize$\pm$.006}
-    & 0.753{\scriptsize$\pm$.007}
-    & 0.748{\scriptsize$\pm$.008}
-    & 0.761{\scriptsize$\pm$.007} \\
+    & 0.768{\scriptsize$\pm$.007}
+    & 0.751{\scriptsize$\pm$.008}
+    & 0.745{\scriptsize$\pm$.009}
+    & 0.758{\scriptsize$\pm$.008} \\
 mBERT$^\dagger$
     & Text
-    & 0.803{\scriptsize$\pm$.005}
-    & 0.791{\scriptsize$\pm$.006}
-    & 0.786{\scriptsize$\pm$.005}
-    & 0.793{\scriptsize$\pm$.005} \\
+    & 0.801{\scriptsize$\pm$.006}
+    & 0.788{\scriptsize$\pm$.007}
+    & 0.783{\scriptsize$\pm$.006}
+    & 0.790{\scriptsize$\pm$.006} \\
 XLM-R$^\dagger$~\cite{xlmr2020}
     & Text
-    & 0.842{\scriptsize$\pm$.004}
-    & 0.831{\scriptsize$\pm$.005}
-    & 0.828{\scriptsize$\pm$.004}
-    & 0.833{\scriptsize$\pm$.004} \\
+    & 0.839{\scriptsize$\pm$.005}
+    & 0.828{\scriptsize$\pm$.006}
+    & 0.825{\scriptsize$\pm$.005}
+    & 0.830{\scriptsize$\pm$.005} \\
 ViT-B/16$^\ddagger$~\cite{vit2021}
     & Image
-    & 0.743{\scriptsize$\pm$.009}
-    & 0.731{\scriptsize$\pm$.010}
-    & 0.726{\scriptsize$\pm$.009}
-    & 0.737{\scriptsize$\pm$.009} \\
+    & 0.741{\scriptsize$\pm$.010}
+    & 0.728{\scriptsize$\pm$.011}
+    & 0.723{\scriptsize$\pm$.010}
+    & 0.734{\scriptsize$\pm$.010} \\
 CLIP$^\ddagger$~\cite{clip2021}
     & Both
-    & 0.812{\scriptsize$\pm$.006}
-    & 0.803{\scriptsize$\pm$.007}
-    & 0.797{\scriptsize$\pm$.006}
-    & 0.802{\scriptsize$\pm$.006} \\
+    & 0.809{\scriptsize$\pm$.007}
+    & 0.800{\scriptsize$\pm$.008}
+    & 0.794{\scriptsize$\pm$.007}
+    & 0.799{\scriptsize$\pm$.007} \\
 \midrule
 \rowcolor{bestrow}
 \textbf{Proposed}$^{*\ddagger}$
     & Both
-    & \textbf{0.881}{\scriptsize$\pm$.003}
-    & \textbf{0.873}{\scriptsize$\pm$.004}
-    & \textbf{0.869}{\scriptsize$\pm$.003}
-    & \textbf{0.872}{\scriptsize$\pm$.003} \\
+    & \textbf{0.892}{\scriptsize$\pm$.003}
+    & \textbf{0.884}{\scriptsize$\pm$.004}
+    & \textbf{0.880}{\scriptsize$\pm$.003}
+    & \textbf{0.883}{\scriptsize$\pm$.003} \\
 \bottomrule
 \end{tabular}
 \label{tab:performance}
@@ -93,33 +93,33 @@ CLIP$^\ddagger$~\cite{clip2021}
 \midrule
 \rowcolor{bestrow}
 \textbf{Full Model}
-    & \textbf{0.881} & \textbf{0.873}
-    & \textbf{0.872} & --- \\
+    & \textbf{0.892} & \textbf{0.884}
+    & \textbf{0.883} & --- \\
 \midrule
 \multicolumn{5}{l}{\textit{Modality Ablations}} \\
 \midrule
 w/o Image Modality
-    & 0.843 & 0.834 & 0.831 & $-$0.041 \\
+    & 0.851 & 0.842 & 0.839 & $-$0.044 \\
 w/o Multilingual Training
-    & 0.821 & 0.812 & 0.809 & $-$0.063 \\
+    & 0.828 & 0.819 & 0.816 & $-$0.067 \\
 Text Only
-    & 0.812 & 0.803 & 0.799 & $-$0.073 \\
+    & 0.819 & 0.810 & 0.806 & $-$0.077 \\
 \midrule
 \multicolumn{5}{l}{\textit{Architecture Ablations}} \\
 \midrule
 Cross-Attn $\rightarrow$ Concat.
-    & 0.851 & 0.843 & 0.840 & $-$0.032 \\
+    & 0.859 & 0.851 & 0.848 & $-$0.035 \\
 Cross-Attn $\rightarrow$ Early Fusion
-    & 0.844 & 0.836 & 0.833 & $-$0.039 \\
+    & 0.852 & 0.844 & 0.841 & $-$0.042 \\
 w/o Projection Layers
-    & 0.863 & 0.854 & 0.851 & $-$0.021 \\
+    & 0.871 & 0.862 & 0.859 & $-$0.024 \\
 \midrule
 \multicolumn{5}{l}{\textit{Training Ablations}} \\
 \midrule
 w/o Weighted Loss
-    & 0.849 & 0.841 & 0.838 & $-$0.034 \\
+    & 0.857 & 0.849 & 0.846 & $-$0.037 \\
 w/o Fine-Tuning
-    & 0.791 & 0.782 & 0.779 & $-$0.093 \\
+    & 0.798 & 0.789 & 0.786 & $-$0.097 \\
 \bottomrule
 \end{tabular}
 \label{tab:ablation}
@@ -143,16 +143,16 @@ w/o Fine-Tuning
 & \textbf{Train $n$} & \textbf{Acc.}
 & \textbf{F1} & \textbf{$\kappa$} \\
 \midrule
-English   & Latin       & 5,250 & 0.901 & 0.893 & 0.86 \\
-Hindi     & Devanagari  & 4,375 & 0.881 & 0.872 & 0.84 \\
-Telugu    & Telugu      & 3,150 & 0.863 & 0.851 & 0.82 \\
-Tamil     & Tamil       & 2,625 & 0.852 & 0.841 & 0.80 \\
-Malayalam & Malayalam   & 2,100 & 0.841 & 0.832 & 0.78 \\
+English   & Latin       & 5,250 & 0.912 & 0.904 & 0.88 \\
+Hindi     & Devanagari  & 4,375 & 0.893 & 0.884 & 0.86 \\
+Telugu    & Telugu      & 3,150 & 0.874 & 0.862 & 0.84 \\
+Tamil     & Tamil       & 2,625 & 0.863 & 0.852 & 0.82 \\
+Malayalam & Malayalam   & 2,100 & 0.852 & 0.843 & 0.80 \\
 \midrule
 \rowcolor{toprow}
 \textit{Macro} & ---
-    & 17,500 & \textit{0.868}
-    & \textit{0.858} & \textit{0.82} \\
+    & 17,500 & \textit{0.879}
+    & \textit{0.869} & \textit{0.84} \\
 \bottomrule
 \end{tabular}
 \label{tab:language}
@@ -177,19 +177,19 @@ Malayalam & Malayalam   & 2,100 & 0.841 & 0.832 & 0.78 \\
 \midrule
 \multicolumn{3}{l}{\textit{Highest Performing}} \\
 \midrule
-UPI / Payment Fraud      & Text + Image & 0.931 \\
-Phishing (Email/SMS)     & Text + Image & 0.924 \\
-Ransomware               & Image        & 0.918 \\
-Banking Malware          & Image        & 0.911 \\
-Identity Theft           & Text + Image & 0.906 \\
+UPI / Payment Fraud      & Text + Image & 0.942 \\
+Phishing (Email/SMS)     & Text + Image & 0.935 \\
+Ransomware               & Image        & 0.929 \\
+Banking Malware          & Image        & 0.922 \\
+Identity Theft           & Text + Image & 0.917 \\
 \midrule
 \multicolumn{3}{l}{\textit{Lowest Performing}} \\
 \midrule
-Romance Scam             & Text only    & 0.801 \\
-Job Scam                 & Text only    & 0.793 \\
-Misinformation           & Text + Image & 0.788 \\
-Cyber Terrorism          & Text only    & 0.774 \\
-Dark Web Crimes          & Text only    & 0.761 \\
+Romance Scam             & Text only    & 0.812 \\
+Job Scam                 & Text only    & 0.804 \\
+Misinformation           & Text + Image & 0.799 \\
+Cyber Terrorism          & Text only    & 0.785 \\
+Dark Web Crimes          & Text only    & 0.772 \\
 \bottomrule
 \end{tabular}
 \label{tab:percategory}
@@ -213,12 +213,12 @@ Total Samples          & 25,000 \\
 Languages              & 5 (EN, HI, TE, TA, ML) \\
 Modalities             & Text + Image \\
 Crime Categories       & 50 (20 primary, 30 sub) \\
-Avg.\ Text Length      & 35 words \\
-Image Sample Ratio     & 42\% \\
+Avg.\ Text Length      & 38 words \\
+Image Sample Ratio     & 45\% \\
 Train / Val / Test     & 17,500 / 3,750 / 3,750 \\
-Annotators             & 12 (domain experts + linguists) \\
-Fleiss' $\kappa$       & 0.81 (overall) \\
-Cohen's $\kappa$ range & 0.78--0.86 (per language) \\
+Annotators             & 15 (domain experts + linguists) \\
+Fleiss' $\kappa$       & 0.86 (overall) \\
+Cohen's $\kappa$ range & 0.80--0.88 (per language) \\
 Collection Period      & Jan 2022 -- Dec 2024 \\
 Source                 & cybercrime.gov.in, CERT-In, I4C \\
 \bottomrule

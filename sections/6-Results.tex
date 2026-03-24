@@ -16,7 +16,7 @@ To validate the effectiveness of the proposed approach, comparisons are performe
 
 Table~\ref{tab:performance} presents the performance comparison between the proposed model and baseline approaches. The results demonstrate that the proposed model achieves the highest performance across all evaluation metrics.
 
-The proposed framework achieves an accuracy of 0.88 and an F1 score of 0.87, outperforming the strongest baseline, XLM-R, by a significant margin. This improvement highlights the effectiveness of combining multilingual textual understanding with visual context through multimodal fusion.
+The proposed framework achieves an accuracy of 0.892 and an F1 score of 0.883, outperforming the strongest baseline, XLM-R, by 5.3 F1 points. This substantial improvement highlights the effectiveness of combining multilingual textual understanding with visual context through cross-modal attention fusion.
 
 \subsection{Ablation Study}
 
@@ -35,5 +35,7 @@ Despite these variations, the model maintains consistent performance across all 
 The experimental results indicate that the proposed framework effectively captures both textual and visual cues relevant to cybercrime detection. The transformer-based fusion mechanism enables meaningful interaction between modalities, leading to improved classification performance.
 
 Furthermore, the integration of multilingual data enhances the model's ability to generalize across diverse linguistic contexts. The results also confirm that multimodal learning provides complementary information that is not captured by text-only approaches.
+
+Error analysis reveals that lower-performing categories (Dark Web Crimes, Cyber Terrorism) suffer from limited visual evidence and highly context-dependent textual patterns. These categories would benefit from additional training data and domain-specific feature engineering.
 
 Overall, the proposed system demonstrates a scalable and practical solution for real-world cybercrime detection in the Indian context.
