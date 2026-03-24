@@ -1,0 +1,178 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\title{Supplementary Material: Ethics Statement\\
+\large Multilingual Multimodal Cybercrime Detection for Indian Context}
+\author{[Authors - To be added after acceptance]}
+\date{SPCOM 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Ethical Approval}
+
+This research was conducted in accordance with institutional ethics guidelines and received approval from the institutional ethics committee. All data collection, annotation, and analysis procedures followed established ethical protocols for handling sensitive cybercrime data.
+
+\section{Data Collection Ethics}
+
+\subsection{Source Legitimacy}
+\begin{itemize}[leftmargin=*]
+\item All data was collected from publicly accessible official government portals:
+  \begin{itemize}
+  \item National Cybercrime Reporting Portal (cybercrime.gov.in)
+  \item CERT-In (Indian Computer Emergency Response Team)
+  \item I4C (Indian Cybercrime Coordination Centre)
+  \end{itemize}
+\item No private or confidential data was accessed
+\item No data was obtained through unauthorized means
+\item All collection complied with the Information Technology Act, 2000 (India)
+\end{itemize}
+
+\subsection{Privacy Protection}
+\begin{itemize}[leftmargin=*]
+\item \textbf{PII Removal:} All personally identifiable information (PII) was removed or anonymized:
+  \begin{itemize}
+  \item Names replaced with generic identifiers
+  \item Phone numbers masked (e.g., +91-XXXX-XXX-789)
+  \item Email addresses anonymized (e.g., user***@domain.com)
+  \item Addresses generalized to city/state level only
+  \item Bank account numbers completely removed
+  \item Aadhaar/PAN numbers removed
+  \end{itemize}
+\item \textbf{Image Anonymization:}
+  \begin{itemize}
+  \item Faces blurred using automated detection
+  \item License plates obscured
+  \item Personal documents redacted
+  \item Screenshots sanitized for identifying information
+  \end{itemize}
+\item \textbf{Metadata Removal:}
+  \begin{itemize}
+  \item EXIF data stripped from images
+  \item Timestamps generalized to month/year
+  \item Location data removed
+  \end{itemize}
+\end{itemize}
+
+\section{Annotator Ethics}
+
+\subsection{Annotator Welfare}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Fair Compensation:} All annotators were compensated at industry-standard rates
+\item \textbf{Working Conditions:} Reasonable working hours with mandatory breaks
+\item \textbf{Mental Health Support:} Access to counseling due to exposure to potentially disturbing content
+\item \textbf{Training:} Comprehensive 40-hour training program before annotation
+\item \textbf{Voluntary Participation:} All annotators participated voluntarily with informed consent
+\end{itemize}
+
+\subsection{Annotator Guidelines}
+Annotators were provided with detailed guidelines including:
+\begin{itemize}[leftmargin=*]
+\item Clear definitions of all 50 cybercrime categories
+\item Examples of each category with explanations
+\item Procedures for handling ambiguous cases
+\item Escalation protocol for difficult decisions
+\item Confidentiality agreements
+\item Data handling and security protocols
+\end{itemize}
+
+\section{Data Security}
+
+\subsection{Storage and Access}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Secure Storage:} All data stored on encrypted servers
+\item \textbf{Access Control:} Role-based access with multi-factor authentication
+\item \textbf{Audit Logs:} All data access logged and monitored
+\item \textbf{Backup:} Encrypted backups with secure off-site storage
+\item \textbf{Retention Policy:} Data will be retained for 5 years post-publication, then securely deleted
+\end{itemize}
+
+\subsection{Data Sharing}
+\begin{itemize}[leftmargin=*]
+\item Dataset will be made available only for academic research purposes
+\item Requesters must sign a data usage agreement
+\item No commercial use permitted
+\item Redistribution prohibited
+\item Compliance with Indian data protection laws required
+\end{itemize}
+
+\section{Potential Risks and Mitigation}
+
+\subsection{Identified Risks}
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Re-identification Risk:} Despite anonymization, there is a theoretical risk of re-identifying individuals
+  \begin{itemize}
+  \item \textit{Mitigation:} Multi-layer anonymization, k-anonymity principles applied
+  \end{itemize}
+
+\item \textbf{Misuse of Model:} The trained model could potentially be misused by malicious actors
+  \begin{itemize}
+  \item \textit{Mitigation:} Model access restricted to verified researchers, usage monitoring
+  \end{itemize}
+
+\item \textbf{Bias Amplification:} Model may amplify existing biases in the data
+  \begin{itemize}
+  \item \textit{Mitigation:} Bias analysis conducted, fairness metrics reported, diverse annotation team
+  \end{itemize}
+
+\item \textbf{False Positives:} Incorrect classifications could harm innocent individuals
+  \begin{itemize}
+  \item \textit{Mitigation:} Model intended as decision support only, not autonomous enforcement
+  \end{itemize}
+\end{enumerate}
+
+\section{Societal Impact}
+
+\subsection{Positive Impacts}
+\begin{itemize}[leftmargin=*]
+\item Enhanced cybercrime detection capabilities for law enforcement
+\item Protection of vulnerable populations from online fraud
+\item Contribution to cybersecurity research in low-resource languages
+\item Support for India's Digital India initiative
+\item Educational resource for cybersecurity awareness
+\end{itemize}
+
+\subsection{Potential Negative Impacts}
+\begin{itemize}[leftmargin=*]
+\item Risk of over-reliance on automated systems
+\item Potential for surveillance concerns
+\item Possible discrimination if model exhibits bias
+\item \textit{Mitigation:} Clear documentation of limitations, emphasis on human oversight, ongoing bias monitoring
+\end{itemize}
+
+\section{Compliance}
+
+This research complies with:
+\begin{itemize}[leftmargin=*]
+\item Information Technology Act, 2000 (India)
+\item Digital Personal Data Protection Act, 2023 (India)
+\item IEEE Code of Ethics
+\item ACM Code of Ethics and Professional Conduct
+\item Institutional research ethics guidelines
+\end{itemize}
+
+\section{Transparency and Accountability}
+
+\begin{itemize}[leftmargin=*]
+\item All methodological decisions documented
+\item Limitations clearly stated in the paper
+\item Code and documentation will be open-sourced
+\item Contact information provided for questions and concerns
+\item Commitment to addressing any identified ethical issues post-publication
+\end{itemize}
+
+\section{Future Ethical Considerations}
+
+\begin{itemize}[leftmargin=*]
+\item Ongoing monitoring for model bias and fairness
+\item Regular updates to reflect evolving threat landscape
+\item Engagement with stakeholders (law enforcement, privacy advocates, affected communities)
+\item Periodic ethics review of deployed systems
+\item Commitment to responsible AI principles
+\end{itemize}
+
+\end{document}
+

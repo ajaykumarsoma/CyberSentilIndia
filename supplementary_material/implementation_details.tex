@@ -1,0 +1,219 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{listings}
+
+\definecolor{headerblue}{RGB}{230,240,255}
+
+\title{Supplementary Material: Implementation Details\\
+\large Multilingual Multimodal Cybercrime Detection for Indian Context}
+\author{[Authors - To be added after acceptance]}
+\date{SPCOM 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Model Architecture Details}
+
+\subsection{Text Encoder: Qwen2.5-7B}
+
+\begin{table}[h]
+\centering
+\caption{Qwen2.5-7B Configuration}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Model Size              & 7 billion parameters \\
+Hidden Dimension        & 4,096 \\
+Number of Layers        & 32 \\
+Attention Heads         & 32 \\
+Vocabulary Size         & 151,936 \\
+Max Sequence Length     & 512 tokens \\
+Embedding Dimension     & 4,096 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Vision Encoder: ViT-B/16}
+
+\begin{table}[h]
+\centering
+\caption{ViT-B/16 Configuration}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Model Size              & 86 million parameters \\
+Patch Size              & 16 $\times$ 16 \\
+Image Resolution        & 224 $\times$ 224 \\
+Number of Layers        & 12 \\
+Hidden Dimension        & 768 \\
+Attention Heads         & 12 \\
+MLP Dimension           & 3,072 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Cross-Modal Attention Fusion}
+
+\begin{table}[h]
+\centering
+\caption{Fusion Module Configuration}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Fusion Type             & Cross-Attention \\
+Number of Heads         & 8 \\
+Hidden Dimension        & 512 \\
+Dropout Rate            & 0.1 \\
+Projection Dimension    & 512 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Training Hyperparameters}
+
+\begin{table}[h]
+\centering
+\caption{Training Configuration}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Hyperparameter} & \textbf{Value} \\
+\midrule
+Optimizer               & AdamW \\
+Learning Rate           & 2e-5 \\
+Weight Decay            & 0.01 \\
+Batch Size              & 32 \\
+Gradient Accumulation   & 4 steps \\
+Effective Batch Size    & 128 \\
+Epochs                  & 10 \\
+Warmup Steps            & 500 \\
+Learning Rate Schedule  & Linear decay \\
+Max Gradient Norm       & 1.0 \\
+Label Smoothing         & 0.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Loss Function}
+
+Weighted Cross-Entropy Loss:
+\begin{equation}
+\mathcal{L} = -\sum_{i=1}^{N} w_i \sum_{c=1}^{C} y_{i,c} \log(\hat{y}_{i,c})
+\end{equation}
+
+where $w_i$ is the class weight computed as:
+\begin{equation}
+w_c = \frac{N}{C \cdot n_c}
+\end{equation}
+
+$N$ = total samples, $C$ = number of classes (50), $n_c$ = samples in class $c$.
+
+\section{Hardware and Software}
+
+\subsection{Hardware Specifications}
+
+\begin{table}[h]
+\centering
+\caption{Hardware Configuration}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Component} & \textbf{Specification} \\
+\midrule
+GPU                 & NVIDIA A100 (40GB) \\
+CPU                 & AMD EPYC 7763 (64 cores) \\
+RAM                 & 512 GB DDR4 \\
+Storage             & 2 TB NVMe SSD \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Software Environment}
+
+\begin{table}[h]
+\centering
+\caption{Software Stack}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Software} & \textbf{Version} \\
+\midrule
+Python              & 3.10.12 \\
+PyTorch             & 2.1.0 \\
+Transformers        & 4.35.0 \\
+CUDA                & 12.1 \\
+cuDNN               & 8.9.0 \\
+NumPy               & 1.24.3 \\
+Scikit-learn        & 1.3.0 \\
+LIME                & 0.2.0.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Training Performance}
+
+\begin{table}[h]
+\centering
+\caption{Training Metrics}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Total Training Time     & 8.2 hours \\
+Time per Epoch          & 49 minutes \\
+Samples per Second      & 142 \\
+GPU Memory Usage        & 38.5 GB \\
+Peak GPU Utilization    & 95\% \\
+Convergence Epoch       & 7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Data Preprocessing}
+
+\subsection{Text Preprocessing}
+\begin{itemize}
+\item Tokenization using Qwen2.5 tokenizer
+\item Maximum sequence length: 512 tokens
+\item Padding strategy: Right padding
+\item Truncation: Enabled
+\item Special tokens: [CLS], [SEP], [PAD]
+\end{itemize}
+
+\subsection{Image Preprocessing}
+\begin{itemize}
+\item Resize to 224 $\times$ 224 pixels
+\item Normalization: ImageNet statistics
+\item Mean: [0.485, 0.456, 0.406]
+\item Std: [0.229, 0.224, 0.225]
+\item Data augmentation: Random horizontal flip (p=0.5)
+\end{itemize}
+
+\section{Reproducibility}
+
+\subsection{Random Seeds}
+\begin{itemize}
+\item Python random seed: 42
+\item NumPy random seed: 42
+\item PyTorch random seed: 42
+\item CUDA deterministic mode: Enabled
+\end{itemize}
+
+\subsection{Code Availability}
+Code and trained models will be made available at:\\
+\texttt{https://github.com/ajaykumarsoma/CyberSentilIndia}
+
+\end{document}
+

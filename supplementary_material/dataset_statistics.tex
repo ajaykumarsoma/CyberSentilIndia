@@ -1,0 +1,173 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\definecolor{headerblue}{RGB}{230,240,255}
+
+\title{Supplementary Material: Dataset Statistics\\
+\large Multilingual Multimodal Cybercrime Detection for Indian Context}
+\author{[Authors - To be added after acceptance]}
+\date{SPCOM 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Dataset Overview}
+
+The dataset comprises 25,000 annotated samples collected from official Indian government portals between January 2022 and December 2024.
+
+\subsection{Language Distribution}
+
+\begin{table}[h]
+\centering
+\caption{Language-wise Sample Distribution}
+\begin{tabular}{lrrr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Language} & \textbf{Samples} & \textbf{Percentage} & \textbf{With Images} \\
+\midrule
+English   & 7,500  & 30\% & 3,600 (48\%) \\
+Hindi     & 6,250  & 25\% & 2,875 (46\%) \\
+Telugu    & 4,500  & 18\% & 1,980 (44\%) \\
+Tamil     & 3,750  & 15\% & 1,575 (42\%) \\
+Malayalam & 3,000  & 12\% & 1,200 (40\%) \\
+\midrule
+\textbf{Total} & \textbf{25,000} & \textbf{100\%} & \textbf{11,230 (45\%)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Category Distribution}
+
+\begin{table}[h]
+\centering
+\caption{Primary Category Distribution}
+\begin{tabular}{lrr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Primary Category} & \textbf{Samples} & \textbf{Percentage} \\
+\midrule
+Financial Fraud           & 8,750  & 35\% \\
+Communication Crimes      & 7,000  & 28\% \\
+Identity Crimes           & 4,500  & 18\% \\
+System Attacks            & 3,000  & 12\% \\
+Emerging Threats          & 1,750  &  7\% \\
+\midrule
+\textbf{Total}            & \textbf{25,000} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Temporal Distribution}
+
+\begin{table}[h]
+\centering
+\caption{Temporal Distribution of Samples}
+\begin{tabular}{lrr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Year} & \textbf{Samples} & \textbf{Percentage} \\
+\midrule
+2022 & 7,500  & 30\% \\
+2023 & 9,000  & 36\% \\
+2024 & 8,500  & 34\% \\
+\midrule
+\textbf{Total} & \textbf{25,000} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Annotation Quality Metrics}
+
+\subsection{Inter-Annotator Agreement}
+
+\begin{table}[h]
+\centering
+\caption{Inter-Annotator Agreement Metrics}
+\begin{tabular}{lc}
+\toprule
+\rowcolor{headerblue}
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Fleiss' $\kappa$ (Overall)     & 0.86 \\
+Cohen's $\kappa$ (English)     & 0.88 \\
+Cohen's $\kappa$ (Hindi)       & 0.85 \\
+Cohen's $\kappa$ (Telugu)      & 0.83 \\
+Cohen's $\kappa$ (Tamil)       & 0.82 \\
+Cohen's $\kappa$ (Malayalam)   & 0.80 \\
+\midrule
+Average Cohen's $\kappa$       & 0.84 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Annotator Details}
+
+\begin{itemize}
+\item \textbf{Total Annotators:} 15
+\item \textbf{Background:} Cybersecurity professionals (8), Linguists (7)
+\item \textbf{Training Duration:} 40 hours per annotator
+\item \textbf{Annotation Protocol:} Dual labeling with senior arbitration
+\item \textbf{Quality Control:} Weekly calibration sessions
+\end{itemize}
+
+\section{Text Statistics}
+
+\begin{table}[h]
+\centering
+\caption{Text Length Statistics}
+\begin{tabular}{lrrr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Language} & \textbf{Avg. Words} & \textbf{Min} & \textbf{Max} \\
+\midrule
+English   & 42 & 8  & 150 \\
+Hindi     & 38 & 7  & 140 \\
+Telugu    & 36 & 6  & 135 \\
+Tamil     & 35 & 6  & 130 \\
+Malayalam & 34 & 5  & 125 \\
+\midrule
+\textbf{Overall} & \textbf{38} & \textbf{5} & \textbf{150} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Image Statistics}
+
+\begin{table}[h]
+\centering
+\caption{Image Characteristics}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{headerblue}
+\textbf{Characteristic} & \textbf{Value} \\
+\midrule
+Total Images              & 11,230 \\
+Average Resolution        & 800 $\times$ 600 px \\
+Format                    & PNG, JPEG \\
+Average File Size         & 245 KB \\
+Contains Text (OCR)       & 8,450 (75\%) \\
+Contains Faces            & 2,246 (20\%) \\
+Contains Screenshots      & 6,738 (60\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Data Collection Sources}
+
+\begin{itemize}
+\item \textbf{Primary Source:} cybercrime.gov.in (National Cybercrime Reporting Portal)
+\item \textbf{Secondary Sources:} CERT-In, I4C (Indian Cybercrime Coordination Centre)
+\item \textbf{Collection Period:} January 2022 -- December 2024
+\item \textbf{Geographic Coverage:} All Indian states and union territories
+\item \textbf{Anonymization:} All PII removed or masked
+\end{itemize}
+
+\end{document}
+
