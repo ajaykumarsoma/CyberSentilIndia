@@ -1,0 +1,273 @@
+% \begin{figure*}[t]
+% \centering
+% \resizebox{\textwidth}{!}{
+% \begin{tikzpicture}[
+%     node distance=1.6cm,
+%     every node/.style={
+%         draw,
+%         rectangle,
+%         rounded corners,
+%         align=center,
+%         font=\small,
+%         minimum width=2.8cm,
+%         minimum height=1cm
+%     },
+%     arrow/.style={->, thick}
+% ]
+
+% % Colors
+% \definecolor{textcolor}{RGB}{220,235,255}
+% \definecolor{imagecolor}{RGB}{255,230,230}
+% \definecolor{fusioncolor}{RGB}{230,255,230}
+% \definecolor{classcolor}{RGB}{255,245,210}
+% \definecolor{explaincolor}{RGB}{240,230,255}
+
+% % Inputs
+% \node[fill=textcolor] (text) {Multilingual Text Input\\(EN, HI, TE, TA, ML)};
+% \node[fill=imagecolor, below=of text] (image) {Image / Screenshot Input};
+
+% % Encoders
+% \node[fill=textcolor, right=of text, xshift=2cm] (textenc) {Text Encoder\\(Qwen2.5 / LLM)};
+% \node[fill=imagecolor, right=of image, xshift=2cm] (imgenc) {Vision Encoder\\(ViT / CNN)};
+
+% % Embeddings
+% \node[right=of textenc] (textemb) {Text Embeddings};
+% \node[right=of imgenc] (imgemb) {Image Embeddings};
+
+% % Projection
+% \node[right=of textemb] (proj1) {Projection Layer};
+% \node[right=of imgemb] (proj2) {Projection Layer};
+
+% % Transformer Fusion Block
+% \node[fill=fusioncolor, right=of proj1, xshift=2.5cm, yshift=-1.3cm] (fusion) {
+% Cross-Modal Transformer\\
+% \begin{tabular}{c}
+% Multi-Head Attention\\
+% + Feed Forward Network
+% \end{tabular}
+% };
+
+% % Classifier
+% \node[fill=classcolor, right=of fusion, xshift=3cm] (classifier) {
+% Classification Head\\
+% (Softmax, 50 Classes)
+% };
+
+% % Explainability
+% \node[fill=explaincolor, below=of classifier] (explain) {
+% Explainability Module\\
+% (LIME + Attention Maps)
+% };
+
+% % Arrows
+% \draw[arrow] (text) -- (textenc);
+% \draw[arrow] (image) -- (imgenc);
+
+% \draw[arrow] (textenc) -- (textemb);
+% \draw[arrow] (imgenc) -- (imgemb);
+
+% \draw[arrow] (textemb) -- (proj1);
+% \draw[arrow] (imgemb) -- (proj2);
+
+% \draw[arrow] (proj1) -- (fusion);
+% \draw[arrow] (proj2) -- (fusion);
+
+% \draw[arrow] (fusion) -- (classifier);
+% \draw[arrow] (classifier) -- (explain);
+
+% % Optional grouping boxes (very professional touch)
+% % \node[draw, dashed, fit=(textenc)(textemb)(proj1), label=above:Text Pipeline] {};
+% % \node[draw, dashed, fit=(imgenc)(imgemb)(proj2), label=above:Vision Pipeline] {};
+% % \node[draw, dashed, fit=(fusion), label=above:Multimodal Fusion] {};
+
+% \end{tikzpicture}
+% }
+% \caption{Transformer-Based Multilingual Multimodal Cybercrime Detection Architecture}
+% \label{fig:cvpr_arch}
+% \end{figure*}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[
+    node distance=0.6cm and 1.8cm,
+    every node/.style={
+        font=\small
+    },
+    box/.style={
+        draw,
+        rectangle,
+        rounded corners=4pt,
+        align=center,
+        minimum width=3.0cm,
+        minimum height=0.9cm,
+        font=\small
+    },
+    arrow/.style={->, thick, >=stealth},
+    dashedbox/.style={
+        draw,
+        dashed,
+        rounded corners=6pt,
+        inner sep=8pt,
+        thick
+    }
+]
+
+%--- Color Definitions ---%
+\definecolor{textcolor}{RGB}{210,228,255}
+\definecolor{imagecolor}{RGB}{255,218,218}
+\definecolor{sharedcolor}{RGB}{220,255,220}
+\definecolor{fusioncolor}{RGB}{198,240,198}
+\definecolor{classcolor}{RGB}{255,243,200}
+\definecolor{explaincolor}{RGB}{238,225,255}
+\definecolor{grouplabel}{RGB}{90,90,90}
+
+%-----------------------------------------------
+% COLUMN 1: Inputs
+%-----------------------------------------------
+\node[box, fill=textcolor]
+    (text) {Multilingual Text\\(EN, HI, TE, TA, ML)};
+
+\node[box, fill=imagecolor, below=1.4cm of text]
+    (image) {Image /\\Screenshot Input};
+
+%-----------------------------------------------
+% COLUMN 2: Encoders
+%-----------------------------------------------
+\node[box, fill=textcolor,
+      right=1.8cm of text]
+    (textenc) {Text Encoder\\(Qwen2.5-7B)};
+
+\node[box, fill=imagecolor,
+      right=1.8cm of image]
+    (imgenc) {Vision Encoder\\(ViT-B/16)};
+
+%-----------------------------------------------
+% COLUMN 3: Embeddings
+%-----------------------------------------------
+\node[box, fill=textcolor,
+      right=1.8cm of textenc]
+    (textemb) {Text\\Embeddings\\$\mathbf{E}_t \in \mathbb{R}^{d}$};
+
+\node[box, fill=imagecolor,
+      right=1.8cm of imgenc]
+    (imgemb) {Image\\Embeddings\\$\mathbf{E}_v \in \mathbb{R}^{d}$};
+
+%-----------------------------------------------
+% COLUMN 4: Projection Layers
+%-----------------------------------------------
+\node[box, fill=sharedcolor,
+      right=1.8cm of textemb]
+    (proj1) {Projection\\Layer\\$\mathbf{P}_t \in \mathbb{R}^{d'}$};
+
+\node[box, fill=sharedcolor,
+      right=1.8cm of imgemb]
+    (proj2) {Projection\\Layer\\$\mathbf{P}_v \in \mathbb{R}^{d'}$};
+
+%-----------------------------------------------
+% COLUMN 5: Cross-Modal Fusion
+%-----------------------------------------------
+\node[box, fill=fusioncolor,
+      minimum width=3.4cm,
+      minimum height=2.0cm,
+      right=1.8cm of proj1,
+      yshift=-0.95cm]
+    (fusion) {Cross-Modal\\Transformer\\[4pt]
+              \scriptsize Multi-Head Attention\\
+              \scriptsize $\text{Attn}(\mathbf{P}_t,\mathbf{P}_v,\mathbf{P}_v)$\\[2pt]
+              \scriptsize + Feed-Forward\\
+              \scriptsize + Layer Norm};
+
+%-----------------------------------------------
+% COLUMN 6: Classification Head
+%-----------------------------------------------
+\node[box, fill=classcolor,
+      minimum width=3.0cm,
+      right=1.8cm of fusion,
+      yshift=0.95cm]
+    (classifier) {Classification Head\\Softmax\\(50 Classes)};
+
+%-----------------------------------------------
+% COLUMN 7: Explainability Module
+%-----------------------------------------------
+\node[box, fill=explaincolor,
+      minimum width=3.0cm,
+      below=1.4cm of classifier]
+    (explain) {Explainability\\LIME (Text)\\Attention Maps (Visual)};
+
+%-----------------------------------------------
+% OUTPUT LABEL
+%-----------------------------------------------
+\node[box,
+      fill=classcolor!60,
+      draw=none,
+      right=1.4cm of classifier]
+    (output) {\textbf{Predicted}\\
+              \textbf{Crime Category}};
+
+%-----------------------------------------------
+% ARROWS
+%-----------------------------------------------
+\draw[arrow] (text)    -- (textenc);
+\draw[arrow] (image)   -- (imgenc);
+\draw[arrow] (textenc) -- (textemb);
+\draw[arrow] (imgenc)  -- (imgemb);
+\draw[arrow] (textemb) -- (proj1);
+\draw[arrow] (imgemb)  -- (proj2);
+\draw[arrow] (proj1)   -- (fusion);
+\draw[arrow] (proj2)   -- (fusion);
+\draw[arrow] (fusion)  -- (classifier);
+\draw[arrow] (classifier) -- (output);
+\draw[arrow] (classifier) -- (explain);
+
+%-----------------------------------------------
+% DASHED GROUPING BOXES — manual coordinates
+% (avoids fit library collapsing on relative nodes)
+%-----------------------------------------------
+
+% Step 1: Add this to your preamble if not already present
+% \usetikzlibrary{positioning, fit, backgrounds}
+
+% Wrap everything below inside a background layer AFTER all nodes are drawn:
+\begin{pgfonlayer}{background}
+
+    % Text Pipeline box — top row
+    % Spans from just left of (text) to just right of (proj1)
+    \draw[dashed, rounded corners=6pt, thick, blue!50]
+        ([xshift=-8pt, yshift=8pt]  text.north west) rectangle
+        ([xshift=8pt,  yshift=-8pt] proj1.south east)
+        node[midway, yshift=55pt, font=\scriptsize, text=blue!70]
+        {Text Pipeline};
+
+    % Vision Pipeline box — bottom row
+    \draw[dashed, rounded corners=6pt, thick, red!50]
+        ([xshift=-8pt, yshift=8pt]  image.north west) rectangle
+        ([xshift=8pt,  yshift=-8pt] proj2.south east)
+        node[midway, yshift=-50pt, font=\scriptsize, text=red!70]
+        {Vision Pipeline};
+
+    % Multimodal Fusion box
+    \draw[dashed, rounded corners=6pt, thick, green!60!black]
+        ([xshift=-10pt, yshift=10pt]  fusion.north west) rectangle
+        ([xshift=10pt,  yshift=-10pt] fusion.south east)
+        node[midway, yshift=42pt, font=\scriptsize, text=green!50!black]
+        {Multimodal Fusion};
+
+    % Output and Explainability box
+    \draw[dashed, rounded corners=6pt, thick, orange!70!black]
+        ([xshift=-8pt, yshift=8pt]  classifier.north west) rectangle
+        ([xshift=8pt,  yshift=-8pt] explain.south east)
+        node[midway, yshift=62pt, font=\scriptsize, text=orange!60!black]
+        {Output \& Explainability};
+
+\end{pgfonlayer}
+      
+\end{tikzpicture}
+}
+\caption{Proposed transformer-based multilingual multimodal cybercrime detection
+architecture. Text and vision pipelines encode inputs independently before projection
+into a shared latent space. A cross-modal transformer fuses both modalities via
+multi-head attention. The classification head predicts one of 50 crime categories,
+with LIME and attention maps providing interpretability.}
+\label{fig:architecture}
+\end{figure*}

@@ -1,0 +1,73 @@
+% \section{Dataset}
+
+% \subsection{Data Collection}
+
+% The dataset is constructed by collecting cybercrime reports from multiple official portals and publicly available sources across different Indian states. The data includes textual descriptions, screenshots, and images associated with cybercrime incidents.
+
+% \subsection{Data Characteristics}
+
+% The dataset consists of approximately 25,000 annotated samples across five languages: English, Hindi, Telugu, Tamil, and Malayalam. Each sample may contain textual content, visual content, or both, making the dataset inherently multimodal.
+
+% \subsection{Annotation Process}
+
+% The collected data is manually annotated into a hierarchical taxonomy comprising 50 cybercrime categories, including 20 primary categories and multiple fine-grained subcategories. Annotation guidelines are designed to ensure consistency across languages and modalities.
+
+% \subsection{Class Distribution}
+
+% The dataset includes a diverse distribution of cybercrime categories, covering financial fraud, social engineering attacks, identity theft, and emerging threats. While some imbalance exists, it reflects real-world cybercrime patterns.
+
+% \subsection{Significance}
+
+% To the best of our knowledge, this is one of the first large-scale multilingual and multimodal cybercrime datasets tailored to the Indian context. The dataset enables research in cross-lingual and multimodal cybercrime detection and provides a benchmark for future studies.
+
+\section{Dataset}
+
+\subsection{Data Collection}
+The dataset is constructed by systematically collecting cybercrime reports from official 
+Indian government portals and publicly available sources, including the National Cyber 
+Crime Reporting Portal (\texttt{cybercrime.gov.in}), state-level cybercrime cells across 
+Telangana, Tamil Nadu, Kerala, Maharashtra, and Uttar Pradesh, CERT-In advisories, and 
+anonymized case summaries published by the Indian Cybercrime Coordination Centre (I4C). 
+Data was collected between January 2022 and December 2024 and includes textual complaint 
+descriptions, screenshots of fraudulent interfaces, and associated images.
+
+\subsection{Data Characteristics}
+The dataset comprises 25,000 annotated samples across English (30\%), Hindi (25\%), 
+Telugu (18\%), Tamil (15\%), and Malayalam (12\%). Approximately 42\% of samples include 
+an associated image or screenshot, with an average text length of 35 words per sample, 
+making the dataset inherently multimodal. Key statistics are summarized in 
+Table~\ref{tab:dataset_stats}.
+
+\subsection{Annotation Process}
+Annotation was performed by 12 trained annotators comprising cybersecurity professionals, 
+legal domain experts, and native speakers of each target language. Each sample was 
+independently labeled by two annotators, with a third senior annotator resolving 
+disagreements. Inter-annotator agreement was measured using Fleiss' Kappa ($\kappa = 
+0.81$, strong agreement) and per-language Cohen's Kappa, ranging from $\kappa = 0.78$ 
+(Malayalam) to $\kappa = 0.86$ (English). Guidelines were refined through two pilot 
+rounds of 500 samples each prior to full-scale annotation.
+
+\subsection{Ethical Considerations}
+All personally identifiable information (PII), including names, contact details, and 
+Aadhaar numbers, was fully anonymized prior to annotation and training. Data from 
+government portals was accessed in accordance with their stated terms of use. The 
+annotation protocol was reviewed and approved by the institutional ethics committee. 
+The dataset will be released in anonymized form upon acceptance under a data usage 
+agreement.
+
+\subsection{Class Distribution}
+The dataset spans 50 fine-grained categories across 20 primary classes. Financial fraud 
+constitutes the largest share ($\sim$35\%), followed by communication-based crimes (28\%), 
+identity-based crimes (18\%), system attacks (12\%), and emerging threats such as 
+AI-based fraud (7\%). Class imbalance reflects real-world incidence patterns; weighted 
+cross-entropy loss and stratified sampling are used during training to mitigate its 
+effect.
+
+\subsection{Significance}
+To the best of our knowledge, this is the first large-scale multilingual multimodal 
+cybercrime dataset for the Indian context, spanning five languages and 50 fine-grained 
+categories with verified inter-annotator agreement. Unlike existing datasets that are 
+predominantly English-only or text-only~\cite{sharma2020cybercrime}, the proposed 
+dataset provides a reproducible benchmark for cross-lingual and multimodal cybercrime 
+detection research. Access will be provided through a controlled release to ensure 
+responsible use.

@@ -1,0 +1,73 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    every node/.style={
+        draw,
+        rectangle,
+        rounded corners,
+        align=center,
+        minimum width=2.6cm,
+        minimum height=0.9cm,
+        font=\small
+    },
+    arrow/.style={->, thick}
+]
+
+% Inputs
+\node (text) {Multilingual Text Input};
+\node (image) [below=of text] {Image Input};
+
+% ===== GAP (FIX) =====
+\node (gap) [below=of image, draw=none] {};
+
+% Encoders (SHIFTED DOWN)
+\node (textenc) [right=of text, xshift=2cm, yshift=-1cm] {Text Encoder\\(Qwen2.5-VL)};
+\node (imgenc) [right=of image, xshift=2cm, yshift=-1cm] {Vision Encoder\\(ViT / CLIP)};
+
+% Embeddings
+\node (textemb) [right=of textenc] {Text Embeddings};
+\node (imgemb) [right=of imgenc] {Image Embeddings};
+
+% Projection
+\node (proj1) [right=of textemb] {Projection};
+\node (proj2) [right=of imgemb] {Projection};
+
+% Fusion block (balanced center)
+\node (fusion) [right=of proj1, xshift=2cm, yshift=-1.2cm] {
+Cross-Modal Transformer\\
+{\scriptsize MHA + FFN}
+};
+
+% Classifier
+\node (classifier) [right=of fusion, xshift=2.5cm] {
+Classifier\\(50 Classes)
+};
+
+% Explainability
+\node (explain) [below=of classifier] {
+Explainability\\(LIME + Attention)
+};
+
+% Arrows
+\draw[arrow] (text) -- (textenc);
+\draw[arrow] (image) -- (imgenc);
+
+\draw[arrow] (textenc) -- (textemb);
+\draw[arrow] (imgenc) -- (imgemb);
+
+\draw[arrow] (textemb) -- (proj1);
+\draw[arrow] (imgemb) -- (proj2);
+
+\draw[arrow] (proj1) -- (fusion);
+\draw[arrow] (proj2) -- (fusion);
+
+\draw[arrow] (fusion) -- (classifier);
+\draw[arrow] (classifier) -- (explain);
+
+\end{tikzpicture}
+}
+\caption{Transformer-Based Multimodal Architecture for Cybercrime Detection}
+\label{fig:transformer_arch}
+\end{figure}

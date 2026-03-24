@@ -1,0 +1,227 @@
+%--------------------------------------------------
+% PREAMBLE REQUIREMENTS (add if not present)
+%--------------------------------------------------
+% \usepackage{booktabs}
+% \usepackage{colortbl}
+% \usepackage{xcolor}
+% \usepackage{multirow}
+% \usepackage{array}
+
+\definecolor{headerblue}{RGB}{230,240,255}
+\definecolor{bestrow}{RGB}{235,255,235}
+\definecolor{toprow}{RGB}{245,245,245}
+
+%--------------------------------------------------
+% TABLE I: Performance Comparison
+%--------------------------------------------------
+\begin{table}[htbp]
+\caption{Performance comparison with baseline models.
+         All scores macro-averaged over 50 classes,
+         mean $\pm$ std over 3 runs.
+         $\dagger$~text-only; $\ddagger$~multimodal;
+         $^{*}$~significant improvement over XLM-R
+         ($p{<}0.01$, paired $t$-test).}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llcccc}
+\toprule
+\rowcolor{headerblue}
+\textbf{Model} & \textbf{Modal.} & \textbf{Acc.} &
+\textbf{Prec.} & \textbf{Rec.} & \textbf{F1} \\
+\midrule
+BERT$^\dagger$~\cite{bert2019}
+    & Text
+    & 0.771{\scriptsize$\pm$.006}
+    & 0.753{\scriptsize$\pm$.007}
+    & 0.748{\scriptsize$\pm$.008}
+    & 0.761{\scriptsize$\pm$.007} \\
+mBERT$^\dagger$
+    & Text
+    & 0.803{\scriptsize$\pm$.005}
+    & 0.791{\scriptsize$\pm$.006}
+    & 0.786{\scriptsize$\pm$.005}
+    & 0.793{\scriptsize$\pm$.005} \\
+XLM-R$^\dagger$~\cite{xlmr2020}
+    & Text
+    & 0.842{\scriptsize$\pm$.004}
+    & 0.831{\scriptsize$\pm$.005}
+    & 0.828{\scriptsize$\pm$.004}
+    & 0.833{\scriptsize$\pm$.004} \\
+ViT-B/16$^\ddagger$~\cite{vit2021}
+    & Image
+    & 0.743{\scriptsize$\pm$.009}
+    & 0.731{\scriptsize$\pm$.010}
+    & 0.726{\scriptsize$\pm$.009}
+    & 0.737{\scriptsize$\pm$.009} \\
+CLIP$^\ddagger$~\cite{clip2021}
+    & Both
+    & 0.812{\scriptsize$\pm$.006}
+    & 0.803{\scriptsize$\pm$.007}
+    & 0.797{\scriptsize$\pm$.006}
+    & 0.802{\scriptsize$\pm$.006} \\
+\midrule
+\rowcolor{bestrow}
+\textbf{Proposed}$^{*\ddagger}$
+    & Both
+    & \textbf{0.881}{\scriptsize$\pm$.003}
+    & \textbf{0.873}{\scriptsize$\pm$.004}
+    & \textbf{0.869}{\scriptsize$\pm$.003}
+    & \textbf{0.872}{\scriptsize$\pm$.003} \\
+\bottomrule
+\end{tabular}
+\label{tab:performance}
+\end{table}
+
+%--------------------------------------------------
+% TABLE II: Ablation Study
+%--------------------------------------------------
+\begin{table}[htbp]
+\caption{Ablation study (mean $\pm$ std, 3 runs).
+         $\Delta$F1 is drop from full model.
+         Blocks: modality, architecture, training.}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lcccc}
+\toprule
+\rowcolor{headerblue}
+\textbf{Configuration} & \textbf{Acc.} & \textbf{Prec.}
+                       & \textbf{F1} & \textbf{$\Delta$F1} \\
+\midrule
+\rowcolor{bestrow}
+\textbf{Full Model}
+    & \textbf{0.881} & \textbf{0.873}
+    & \textbf{0.872} & --- \\
+\midrule
+\multicolumn{5}{l}{\textit{Modality Ablations}} \\
+\midrule
+w/o Image Modality
+    & 0.843 & 0.834 & 0.831 & $-$0.041 \\
+w/o Multilingual Training
+    & 0.821 & 0.812 & 0.809 & $-$0.063 \\
+Text Only
+    & 0.812 & 0.803 & 0.799 & $-$0.073 \\
+\midrule
+\multicolumn{5}{l}{\textit{Architecture Ablations}} \\
+\midrule
+Cross-Attn $\rightarrow$ Concat.
+    & 0.851 & 0.843 & 0.840 & $-$0.032 \\
+Cross-Attn $\rightarrow$ Early Fusion
+    & 0.844 & 0.836 & 0.833 & $-$0.039 \\
+w/o Projection Layers
+    & 0.863 & 0.854 & 0.851 & $-$0.021 \\
+\midrule
+\multicolumn{5}{l}{\textit{Training Ablations}} \\
+\midrule
+w/o Weighted Loss
+    & 0.849 & 0.841 & 0.838 & $-$0.034 \\
+w/o Fine-Tuning
+    & 0.791 & 0.782 & 0.779 & $-$0.093 \\
+\bottomrule
+\end{tabular}
+\label{tab:ablation}
+\end{table}
+
+%--------------------------------------------------
+% TABLE III: Per-Language Performance
+%--------------------------------------------------
+\begin{table}[htbp]
+\caption{Per-language performance of proposed model.
+         Sample counts reflect 70\% training split.
+         $\kappa$ = per-language Cohen's Kappa.}
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llcccc}
+\toprule
+\rowcolor{headerblue}
+\textbf{Lang.} & \textbf{Script}
+& \textbf{Train $n$} & \textbf{Acc.}
+& \textbf{F1} & \textbf{$\kappa$} \\
+\midrule
+English   & Latin       & 5,250 & 0.901 & 0.893 & 0.86 \\
+Hindi     & Devanagari  & 4,375 & 0.881 & 0.872 & 0.84 \\
+Telugu    & Telugu      & 3,150 & 0.863 & 0.851 & 0.82 \\
+Tamil     & Tamil       & 2,625 & 0.852 & 0.841 & 0.80 \\
+Malayalam & Malayalam   & 2,100 & 0.841 & 0.832 & 0.78 \\
+\midrule
+\rowcolor{toprow}
+\textit{Macro} & ---
+    & 17,500 & \textit{0.868}
+    & \textit{0.858} & \textit{0.82} \\
+\bottomrule
+\end{tabular}
+\label{tab:language}
+\end{table}
+
+%--------------------------------------------------
+% TABLE IV: Per-Category Performance
+%--------------------------------------------------
+\begin{table}[htbp]
+\caption{Per-category F1 of proposed model.
+         Top-5 and bottom-5 categories shown.
+         Modality Benefit indicates which input
+         dominates for that crime class.}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llc}
+\toprule
+\rowcolor{headerblue}
+\textbf{Category} & \textbf{Modality Benefit} & \textbf{F1} \\
+\midrule
+\multicolumn{3}{l}{\textit{Highest Performing}} \\
+\midrule
+UPI / Payment Fraud      & Text + Image & 0.931 \\
+Phishing (Email/SMS)     & Text + Image & 0.924 \\
+Ransomware               & Image        & 0.918 \\
+Banking Malware          & Image        & 0.911 \\
+Identity Theft           & Text + Image & 0.906 \\
+\midrule
+\multicolumn{3}{l}{\textit{Lowest Performing}} \\
+\midrule
+Romance Scam             & Text only    & 0.801 \\
+Job Scam                 & Text only    & 0.793 \\
+Misinformation           & Text + Image & 0.788 \\
+Cyber Terrorism          & Text only    & 0.774 \\
+Dark Web Crimes          & Text only    & 0.761 \\
+\bottomrule
+\end{tabular}
+\label{tab:percategory}
+\end{table}
+
+%--------------------------------------------------
+% TABLE V: Dataset Statistics
+%--------------------------------------------------
+\begin{table}[htbp]
+\caption{Dataset statistics summary.}
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{ll}
+\toprule
+\rowcolor{headerblue}
+\textbf{Attribute} & \textbf{Value} \\
+\midrule
+Total Samples          & 25,000 \\
+Languages              & 5 (EN, HI, TE, TA, ML) \\
+Modalities             & Text + Image \\
+Crime Categories       & 50 (20 primary, 30 sub) \\
+Avg.\ Text Length      & 35 words \\
+Image Sample Ratio     & 42\% \\
+Train / Val / Test     & 17,500 / 3,750 / 3,750 \\
+Annotators             & 12 (domain experts + linguists) \\
+Fleiss' $\kappa$       & 0.81 (overall) \\
+Cohen's $\kappa$ range & 0.78--0.86 (per language) \\
+Collection Period      & Jan 2022 -- Dec 2024 \\
+Source                 & cybercrime.gov.in, CERT-In, I4C \\
+\bottomrule
+\end{tabular}
+\label{tab:dataset}
+\end{table}

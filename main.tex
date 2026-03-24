@@ -1,0 +1,71 @@
+% SPCOM 2026 Conference Paper - Multilingual Multimodal Cybercrime Detection
+% Double-blind review: NO author information, NO page numbers, NO hyperlinks
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% Packages
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{multirow}
+
+% SPCOM 2026 Compliance: Disable hyperlinks and bookmarks
+% "The submitted PDF must NOT contain any bookmarks or hyperlinks."
+\usepackage[draft]{hyperref}
+\hypersetup{
+    draft=true,
+    hidelinks,
+    bookmarks=false,
+    pdfborder={0 0 0}
+}
+
+% Table colors
+\definecolor{headerblue}{RGB}{230,240,255}
+\definecolor{bestrow}{RGB}{235,255,235}
+\definecolor{toprow}{RGB}{245,245,245}
+
+% TikZ libraries
+\usetikzlibrary{shapes,arrows,positioning}
+\usetikzlibrary{positioning, fit, backgrounds}
+\pgfdeclarelayer{background}
+\pgfsetlayers{background, main}
+
+% SPCOM 2026 Compliance: NO page numbers, headers, or footers
+% "It should have no content written in the margins.
+% In particular, no header, footer, or page numbers."
+\pagestyle{empty}
+
+\begin{document}
+
+\title{Multilingual Multimodal Cybercrime Detection for Indian Context Using Explainable Artificial Intelligence}
+
+% SPCOM 2026 Double-Blind Review: NO author information
+% Author block will be added after acceptance
+% Removed \thanks{} as it may contain identifying information
+
+\maketitle
+
+% Ensure no page number on first page (SPCOM requirement)
+\thispagestyle{empty}
+
+\input{sections/1-Abstract}
+\input{sections/2-Intro}
+\input{sections/3-Dataset}
+\input{sections/3.1-Taxonamy}
+\input{sections/3-Related Work}
+\input{sections/5-Methodology}
+\input{sections/8-Architecture}
+\input{sections/6-Results}
+\input{sections/10-tables}
+\input{sections/7-Conclusion}
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

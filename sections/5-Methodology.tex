@@ -1,0 +1,79 @@
+% \section{Methodology}
+
+% This section presents the proposed multilingual multimodal cybercrime detection framework. The overall architecture, illustrated in Fig.~\ref{fig:transformer_arch}, integrates textual and visual modalities using a transformer-based fusion mechanism.
+
+% \subsection{Data Preprocessing}
+
+% The collected dataset consists of multilingual textual data and associated visual content, including screenshots and images. Text data in English, Hindi, Telugu, Tamil, and Malayalam is normalized using standard preprocessing techniques such as tokenization, noise removal, and language normalization. Visual inputs are resized and standardized for consistent feature extraction. All samples are annotated into a hierarchical taxonomy of 50 cybercrime categories.
+
+% \subsection{Text Encoding}
+
+% Multilingual textual inputs are processed using a pre-trained language model based on Qwen2.5. The model generates contextualized embeddings that capture semantic and cross-lingual representations. Fine-tuning is performed on the domain-specific dataset to adapt the model to cybercrime-related patterns.
+
+% \subsection{Image Encoding}
+
+% Visual inputs are encoded using a vision transformer-based encoder. The encoder extracts high-level feature representations from images and screenshots, capturing patterns relevant to cybercrime such as fraudulent interfaces and message layouts.
+
+% \subsection{Feature Projection}
+
+% The textual and visual embeddings are projected into a shared latent space using linear projection layers. This step ensures dimensional alignment and facilitates effective cross-modal interaction.
+
+% \subsection{Multimodal Fusion}
+
+% The projected features are fused using a cross-modal transformer module. The fusion block employs multi-head attention to model interactions between textual and visual representations, followed by feed-forward layers for feature refinement. This enables the model to capture complementary information across modalities.
+
+% \subsection{Classification}
+
+% The fused representation is passed to a classification head consisting of fully connected layers and a softmax function. The model predicts one of the predefined cybercrime categories based on the learned multimodal features.
+
+% \subsection{Explainability}
+
+% To enhance interpretability, explainable artificial intelligence techniques are incorporated. Local Interpretable Model-agnostic Explanations are used to provide feature-level insights for textual inputs, while attention maps highlight important regions in visual data. This facilitates transparency and supports real-world deployment.
+
+% \subsection{Training Details}
+
+% The model is trained using a cross-entropy loss function. Optimization is performed using the Adam optimizer with appropriate learning rate scheduling. The dataset is split into training, validation, and test sets to ensure robust evaluation.
+
+% REPLACE the current verbose subsections B through H 
+% with this compressed version:
+
+\subsection{Text Encoding}
+Multilingual inputs are processed using Qwen2.5-7B, 
+fine-tuned on the domain-specific dataset to generate 
+contextualized cross-lingual embeddings 
+$\mathbf{E}_t \in \mathbb{R}^{d}$.
+
+\subsection{Image Encoding}
+Visual inputs are encoded using ViT-B/16, extracting 
+high-level feature maps $\mathbf{E}_v \in \mathbb{R}^{d}$ 
+from screenshots and images.
+
+\subsection{Feature Projection and Fusion}
+Both embeddings are projected to a shared latent space 
+$\mathbb{R}^{d'}$ via linear layers. A cross-modal 
+transformer block then fuses them using multi-head 
+attention:
+\begin{equation}
+\mathbf{F} = \text{Attn}(\mathbf{P}_t, \mathbf{P}_v, 
+\mathbf{P}_v) = \text{softmax}
+\!\left(\frac{\mathbf{P}_t \mathbf{P}_v^\top}
+{\sqrt{d'}}\right)\mathbf{P}_v
+\end{equation}
+followed by a feed-forward network and layer 
+normalisation.
+
+\subsection{Classification and Explainability}
+The fused representation $\mathbf{F}$ is passed to a 
+fully-connected softmax head predicting one of 50 
+cybercrime categories. LIME provides token-level 
+interpretability for text, while transformer attention 
+maps highlight salient image regions.
+
+\subsection{Training Details}
+The model is trained with weighted cross-entropy loss 
+using the Adam optimiser (lr=$2\times10^{-5}$, 
+$\beta_1{=}0.9$, $\beta_2{=}0.999$), linear warmup 
+over 500 steps, and cosine decay. Batch size is 32; 
+training runs for 10 epochs on a single NVIDIA A100 
+GPU. The 70/15/15 train/val/test split yields 17,500 / 
+3,750 / 3,750 samples.

@@ -1,0 +1,39 @@
+\section{Experiments and Results}
+
+This section presents the experimental setup, baseline comparisons, and performance evaluation of the proposed multilingual multimodal cybercrime detection framework.
+
+\subsection{Experimental Setup}
+
+The proposed model is evaluated on the collected dataset of 25000 annotated samples across five languages, namely English, Hindi, Telugu, Tamil, and Malayalam. The dataset is split into training, validation, and test sets in a 70:15:15 ratio. 
+
+Performance is evaluated using standard classification metrics, including accuracy, precision, and F1 score. These metrics are chosen to account for class imbalance and provide a comprehensive evaluation of model performance across multiple cybercrime categories.
+
+\subsection{Baseline Models}
+
+To validate the effectiveness of the proposed approach, comparisons are performed with strong baseline models. These include monolingual and multilingual text-based models, as well as multimodal approaches. Specifically, BERT is used as a monolingual baseline, while mBERT and XLM-R serve as multilingual baselines. Additionally, a vision-language model based on CLIP is used to evaluate multimodal performance.
+
+\subsection{Overall Performance}
+
+Table~\ref{tab:performance} presents the performance comparison between the proposed model and baseline approaches. The results demonstrate that the proposed model achieves the highest performance across all evaluation metrics.
+
+The proposed framework achieves an accuracy of 0.88 and an F1 score of 0.87, outperforming the strongest baseline, XLM-R, by a significant margin. This improvement highlights the effectiveness of combining multilingual textual understanding with visual context through multimodal fusion.
+
+\subsection{Ablation Study}
+
+To analyze the contribution of each component, an ablation study is conducted as shown in Table~\ref{tab:ablation}. Removing the image modality results in a noticeable drop in performance, indicating the importance of visual features in detecting cybercrime patterns. Similarly, removing multilingual training reduces performance, demonstrating the necessity of cross-lingual representation learning.
+
+The text-only model performs significantly lower than the full model, confirming the advantage of multimodal integration. Additionally, the model without fine-tuning shows reduced performance, emphasizing the importance of domain adaptation.
+
+\subsection{Per-Language Analysis}
+
+Table~\ref{tab:language} presents the performance of the proposed model across different languages. The model achieves the highest performance on English and Hindi, while slightly lower performance is observed for Telugu, Tamil, and Malayalam. This variation is attributed to differences in data distribution and linguistic complexity.
+
+Despite these variations, the model maintains consistent performance across all languages, demonstrating strong generalization capabilities in multilingual settings.
+
+\subsection{Discussion}
+
+The experimental results indicate that the proposed framework effectively captures both textual and visual cues relevant to cybercrime detection. The transformer-based fusion mechanism enables meaningful interaction between modalities, leading to improved classification performance.
+
+Furthermore, the integration of multilingual data enhances the model's ability to generalize across diverse linguistic contexts. The results also confirm that multimodal learning provides complementary information that is not captured by text-only approaches.
+
+Overall, the proposed system demonstrates a scalable and practical solution for real-world cybercrime detection in the Indian context.
