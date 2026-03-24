@@ -71,11 +71,8 @@ maps highlight salient image regions.
 
 \subsection{Training Details}
 The model is trained with weighted cross-entropy loss
-using the Adam optimiser (lr=$2\times10^{-5}$,
-$\beta_1{=}0.9$, $\beta_2{=}0.999$), linear warmup
-over 500 steps, and cosine decay. Batch size is 32;
-training runs for 10 epochs on a single NVIDIA A100
-GPU (40GB), requiring approximately 8.2 hours total
-training time. Inference speed is 142 samples/second
-on the same hardware. The 70/15/15 train/val/test
-split yields 17,500 / 3,750 / 3,750 samples.
+using Adam (lr=$2\times10^{-5}$, $\beta_1{=}0.9$,
+$\beta_2{=}0.999$), linear warmup over 500 steps, and
+cosine decay. Batch size is 32; training runs for 10
+epochs on NVIDIA A100 (40GB) in 8.2 hours. Inference:
+142 samples/sec. Split: 70/15/15 (17,500/3,750/3,750).
